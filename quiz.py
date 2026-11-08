@@ -6,6 +6,7 @@ class Quiz:
                 self.explanation = explanation
 
         def display(self):
+                print("==============================")
                 print(f"Q : {self.question}")
 
                 for i, option in enumerate(self.options, start=1):

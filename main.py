@@ -1,17 +1,25 @@
 from quiz import *
+from storage import save_state, load_state
 import quiz_data
 
 def main():
         print("Codyssey Quiz Game")
         high_score = 0
         game = QuizGame(quiz_data.quizzes)
+        saved = load_state()
+
+        if saved is not None:
+                quizzes, high_score = saved
+                quiz_data.quizzes = quizzes
+
+        game = QuizGame(quiz_data.get_quizzes())
 
         while True:
             show_menu()
             choice = get_num("select Menu : ", 1, 5)
 
             if choice == 1:
-                print("==== 퀴즈 풀기(미구현) ====")
+                print("==== 퀴즈 풀기 ====")
                 game.start_game()
                 
                 for quiz in game.quizzes:
@@ -43,6 +51,7 @@ def main():
                 print(f"High Score : {high_score}")
             elif choice == 5:
                 print("==== 게임 종료 ====")
+                save_state(quiz_data.get_quizzes(), high_score)
                 break
 
 
