@@ -19,10 +19,10 @@ def save_state(quizzes, high_score):
             })
     try:
         with open(STATE_FILE, "w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
+            json.dump(data, file, ensure_ascii=False, indent=4)
 
     except OSError as error:
-        print("파일 저장 오류: {error}")
+        print(f"파일 저장 오류: {error}")
         return False
 
     print("데이터 저장 완료")
@@ -32,21 +32,22 @@ def load_state():
     if not STATE_FILE.exists():
         return None
 
-    with open(STATE_FILE, "r", encoding="utf-8") as file:
-        data = json.load(file)
+    try:
+        with open(STATE_FILE, "r", encoding="utf-8") as file:
+            data = json.load(file)
 
-    quizzes = []
+            quizzes = []
 
-    for item in data["quizzes"]:
-        quiz = Quiz(
-            item["question"],
-            item["options"],
-            item["answer"],
-            item["explanation"]
-            )
-        quizzes.append(quiz)
+            for item in data["quizzes"]:
+                quiz = Quiz(
+                    item["question"],
+                    item["options"],
+                    item["answer"],
+                    item["explanation"]
+                    )
+                quizzes.append(quiz)
 
-    return quizzes, data["high_score"]
+        return quizzes, data["high_score"]
 
     except FileNotFoundError:
         print("저장 파일이 없습니다. 기본 데이터로 시작합니다.")
