@@ -1,17 +1,31 @@
 from quiz_data import quizzes
+from quiz import QuizGame
 
 def main():
         print("Codyssey Quiz Game")
-        show_menu()
+        game = QuizGame(quizzes)
 
         while True:
-            
+            show_menu()
             choice = get_num("select Menu : ", 1, 5)
 
             if choice == 1:
                 print("==== 퀴즈 풀기(미구현) ====")
-                quizzes[0].display()
-                print("첫 번째 문제의 정답:", quizzes[0].answer)
+                game.start_game()
+                
+                for quiz in game.quizzes:
+                        quiz.display()
+                        answer = get_num("input answer : ", 1, 4)
+                        
+                        if game.submit_answer(quiz,answer):
+                                print("correct!")
+                        else:
+                                print("wrong...")
+                                
+                        print(f"해설 : {quiz.explanation}")
+                        print()
+
+                game.show_result()
             elif choice == 2:
                 print("==== 퀴즈 추가(미구현) ====")
             elif choice == 3:
