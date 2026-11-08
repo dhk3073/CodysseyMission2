@@ -176,8 +176,6 @@ python main.py
 * 최고 점수 저장 \[o]
 * JSON 파일을 통한 데이터 저장 \[o]
 
-
-
 ## 실행 환경
 
 * Python 3.10 이상
@@ -185,4 +183,20 @@ python main.py
 
 ## 저장소 복제 실습
 
-* 이 줄은 저장소 복제 및 커밋 반영여부를 확인하기 위해 작성되었습니다.
+* 이 줄은 저장소 복제 및 커밋 반영여부를 확인하기 위해 작성되었으며, 정상작동여부를 확인했습니다.
+
+## Git 브랜치 전환 실습
+
+main - feature/quiz-class 브랜치 이동을 통해 연습
+
+```bash
+git checkout feature/quiz-class
+git branch
+
+git checkout main
+git branch
+
+git reflog -4
+```
+
+로그상에 정상출력됨을 확인
