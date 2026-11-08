@@ -3,6 +3,7 @@ import quiz_data
 
 def main():
         print("Codyssey Quiz Game")
+        high_score = 0
         game = QuizGame(quiz_data.quizzes)
 
         while True:
@@ -24,8 +25,13 @@ def main():
                                 
                         print(f"해설 : {quiz.explanation}")
                         print()
+                        
+                if game.score > high_score:
+                        high_score = game.score
+                        print("New Record!")
 
                 game.show_result()
+                
             elif choice == 2:
                 print("==== 퀴즈 추가 ====")
                 create_quiz()
@@ -33,10 +39,13 @@ def main():
                 print("==== 퀴즈 목록 ====")
                 show_quiz_list()
             elif choice == 4:
-                print("==== 최고 점수(미구현) ====")
+                print("==== 최고 점수 ====")
+                print(f"High Score : {high_score}")
             elif choice == 5:
                 print("==== 게임 종료 ====")
                 break
+
+
             
 def show_menu():
         print("==== Menu ====")
@@ -64,9 +73,8 @@ def get_num(prompt, min_val, max_val):
 def get_text(prompt):
         while True:
                 text = input(prompt)
-                not_empty = text.strip()
 
-                if not_empty:
+                if text.strip():
                         return text
 
                 print("Can not input empty text.")
