@@ -32,3 +32,11 @@ quizzes = [
         "dict는 키와 값의 쌍으로 데이터를 저장한다."
     )
 ]
+
+def add_quiz(quiz):
+    quizzes.append(quiz)
+
+def get_quizzes():
+    return quizzes
+
+
