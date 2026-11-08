@@ -1,3 +1,5 @@
+from quiz_data import quizzes
+
 def main():
         print("Codyssey Quiz Game")
         show_menu()
@@ -8,6 +10,8 @@ def main():
 
             if choice == 1:
                 print("==== 퀴즈 풀기(미구현) ====")
+                quizzes[0].display()
+                print("첫 번째 문제의 정답:", quizzes[0].answer)
             elif choice == 2:
                 print("==== 퀴즈 추가(미구현) ====")
             elif choice == 3:
