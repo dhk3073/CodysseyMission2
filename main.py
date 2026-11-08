@@ -37,12 +37,14 @@ def main():
                 if game.score > high_score:
                         high_score = game.score
                         print("New Record!")
+                        save_state(quiz_data.get_quizzes(), high_score)
 
                 game.show_result()
                 
             elif choice == 2:
                 print("==== 퀴즈 추가 ====")
                 create_quiz()
+                save_state(quiz_data.get_quizzes(), high_score)
             elif choice == 3:
                 print("==== 퀴즈 목록 ====")
                 show_quiz_list()
@@ -51,9 +53,21 @@ def main():
                 print(f"High Score : {high_score}")
             elif choice == 5:
                 print("==== 게임 종료 ====")
-                save_state(quiz_data.get_quizzes(), high_score)
-                break
+                while True:
+                        if save_state(quiz_data.get_quizzes(), high_score):
+                                return
+                        
+                        print("저장 실패")
+                        
+                        retry = input("다시 저장하시겠습니까? (y/n): ").strip().lower()
 
+                        if retry == 'y':
+                                continue
+                        elif retry == 'n':
+                                print("저장되지 않은 데이터가 있을 수 있습니다.")
+                                return
+                        else:
+                                print("잘못된 입력입니다.")
 
             
 def show_menu():
