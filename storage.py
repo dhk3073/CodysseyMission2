@@ -1,9 +1,11 @@
 import json
 from pathlib import Path
 from quiz import Quiz
+import shutil
 
 STATE_FILE = Path(__file__).resolve().parent / "state.json"
 
+## 파일 저장 
 def save_state(quizzes, high_score):
     data = {
         "high_score": high_score,
@@ -28,6 +30,7 @@ def save_state(quizzes, high_score):
     print("데이터 저장 완료")
     return True
 
+## 파일 불러오기
 def load_state():
     if not STATE_FILE.exists():
         return None
@@ -64,3 +67,20 @@ def load_state():
     except OSError as error:
         print(f"파일 읽기 오류: {error}")
         return None
+    except OSError:
+        return False
+
+#백업 파일
+BACKUP_FILE = STATE_FILE.with_name("state_backup.json")
+
+# 백업
+def backup_state():
+    shutil.copy2(STATE_FILE, BACKUP_FILE)
+
+# 복구
+def restore_state():
+    shutil.copy2(BACKUP_FILE, STATE_FILE)
+
+# 초기화
+def reset_state():
+    STATE_FILE.unlink(missing_ok=True)
