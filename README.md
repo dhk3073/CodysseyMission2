@@ -267,4 +267,6 @@ git branch
 git reflog -4
 ```
 
+![실습 내용](<images/브랜치 전환.png>)
+
 로그상에 정상출력됨을 확인
